@@ -22,3 +22,10 @@ type Appointment struct {
 	DeletedAt       gorm.DeletedAt `gorm:"index" json:"-"`
 }
 
+type AppointmentFilter struct {
+	CustomerID uint
+	ProviderID uint
+	ServiceID  uint
+	Status     string
+}
+

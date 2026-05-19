@@ -46,6 +46,14 @@ func main() {
 	customerService := services.NewCustomerService(configs.DB, customerRepo, cacheService)
 	customerHandler := handlers.NewCustomerHandler(customerService)
 
+	providerRepo := repositories.NewProviderRepository(configs.DB)
+	providerService := services.NewProviderService(configs.DB, providerRepo, cacheService)
+	providerHandler := handlers.NewProviderHandler(providerService)
+
+	appointmentRepo := repositories.NewAppointmentRepository(configs.DB)
+	appointmentService := services.NewAppointmentService(configs.DB, appointmentRepo, cacheService)
+	appointmentHandler := handlers.NewAppointmentHandler(appointmentService)
+
 	// 5. Setup Router
 	r := gin.Default()
 
@@ -55,9 +63,11 @@ func main() {
 
 	// 6. Setup Routes
 	routes.SetupRoutes(r, &routes.RouterContainer{
-		AuthHandler:      authHandler,
-		CustomerHandler:  customerHandler,
-		BlacklistService: blacklistService,
+		AuthHandler:        authHandler,
+		CustomerHandler:    customerHandler,
+		ProviderHandler:    providerHandler,
+		AppointmentHandler: appointmentHandler,
+		BlacklistService:   blacklistService,
 	})
 
 	// 7. Start Server

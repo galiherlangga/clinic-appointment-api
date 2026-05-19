@@ -8,9 +8,11 @@ import (
 )
 
 type RouterContainer struct {
-	AuthHandler      *handlers.AuthHandler
-	CustomerHandler  *handlers.CustomerHandler
-	BlacklistService services.BlacklistService
+	AuthHandler        *handlers.AuthHandler
+	CustomerHandler    *handlers.CustomerHandler
+	ProviderHandler    *handlers.ProviderHandler
+	AppointmentHandler *handlers.AppointmentHandler
+	BlacklistService   services.BlacklistService
 }
 
 func SetupRoutes(r *gin.Engine, c *RouterContainer) {
@@ -20,6 +22,8 @@ func SetupRoutes(r *gin.Engine, c *RouterContainer) {
 		// Delegate to module-specific routing registrations
 		RegisterAuthRoutes(v1, c)
 		RegisterCustomerRoutes(v1, c)
+		RegisterProviderRoutes(v1, c)
+		RegisterAppointmentRoutes(v1, c)
 		RegisterAdminRoutes(v1, c)
 	}
 }
