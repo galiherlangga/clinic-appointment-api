@@ -1,0 +1,4 @@
+DROP TABLE IF EXISTS appointments;
+DROP TABLE IF EXISTS services;
+DROP TABLE IF EXISTS providers;
+DROP TABLE IF EXISTS customers;
